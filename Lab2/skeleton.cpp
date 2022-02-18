@@ -24,14 +24,14 @@ int main()
       cout << pos1 << pos2 << endl;
       cout << pos3 << pos4 << endl;
 
-      cout << "Invalid input.";
-      cout << "Enter a number between 1 to 4 to slide:";
+      cout << "Enter a position number between 1 to 4 to slide:";
       cin >> choice;
 
       // Task 2: check the input
       while (choice != 1 && choice != 2 && choice != 3 && choice != 4)
       {
-         cout << "Enter a position number between 1 to 4 to slide:";
+         cout << "Invalid input.\n";
+         cout << "Enter a number between 1 to 4 to slide:";
          cin.clear();
          cin.ignore(INT_MAX, '\n');
          cin >> choice;
