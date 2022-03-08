@@ -47,10 +47,6 @@ int steal_house(int houses[], int cur_pos, int alert_dis, int night)
                 {
                     return target;
                 }
-                else
-                {
-                    return -1;
-                }
             }
         }
     }
@@ -64,10 +60,6 @@ int steal_house(int houses[], int cur_pos, int alert_dis, int night)
                 if (target + cur_pos >= cur_pos + alert_dis || target + cur_pos <= cur_pos - alert_dis)
                 {
                     return target;
-                }
-                else
-                {
-                    return -1;
                 }
             }
         }
