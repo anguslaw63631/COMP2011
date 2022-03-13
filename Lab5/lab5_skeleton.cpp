@@ -105,15 +105,20 @@ bool read_encrypted_messages(string encrypted[], int &message_len)
     {
         return false;
     }
-    message_len = 30;
-    // fin >> message_len;
-    for (int i = 0; i < 30; ++i)
+
+    std::string line;
+    for (message_len = 0; std::getline(fin, line); ++message_len)
+        ;
+
+    fin.clear();
+    fin.seekg(0);
+
+    for (int i = 0; i < message_len; ++i)
     {
         fin >> encrypted[i];
     }
     fin.close();
-
-    // cout<< "result: " << encrypted[14] << endl;
+    
     return true;
     // CODES ENDS HERE
 }
@@ -175,7 +180,8 @@ bool store_decrypted_messages(string decrypted[], int message_len)
 
     ofstream MyFile("decrypted.txt");
 
-    if(!MyFile){
+    if (!MyFile)
+    {
         return false;
     }
 
