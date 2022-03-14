@@ -72,14 +72,23 @@ bool is_all_in_list(string word[], int length)
 {
     // TODO: implement this function according to comments above.
     // CODE STARTS HERE
+    int count = 0;
     for (int i = 0; i < length; i++)
     {
         if (is_in_list(word[i]))
         {
-            return true;
+            count++;
         }
     }
-    return false;
+    if (count >= 2)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
     // CODE ENDS HERE
 }
 
@@ -118,7 +127,7 @@ bool read_encrypted_messages(string encrypted[], int &message_len)
         fin >> encrypted[i];
     }
     fin.close();
-    
+
     return true;
     // CODES ENDS HERE
 }
@@ -140,21 +149,33 @@ bool find_valid_shift(string encrypted[], int message_len, string decrypted[])
 {
     // TODO: implement this function according to comments above.
     // CODE STARTS HERE
-    for (int j = 10; j <= 10; j++)
+    string encryptedTemp[MAX_WORDS];
+    string decryptedTemp[MAX_WORDS];
+    for (int j = 0; j <= 25; j++)
     {
+        for (int i = 0; i < MAX_WORDS; i++)
+        {
+            encryptedTemp[i] = encrypted[i];
+            decryptedTemp[i] = decrypted[i];
+        }
+
         for (int i = 0; i < message_len; i++)
         {
-            for (int k = 0; k < encrypted[i].length(); k++)
+            for (int k = 0; k < encryptedTemp[i].length(); k++)
             {
-                decrypted[i] += encrypted[i][k] + j;
-                if (encrypted[i][k] + j > 122)
+                decryptedTemp[i] += encryptedTemp[i][k] + j;
+                if (encryptedTemp[i][k] + j > 122)
                 {
-                    decrypted[i][k] -= 26;
+                    decryptedTemp[i][k] -= 26;
                 }
             }
         }
-        if (is_all_in_list(decrypted, message_len))
+        if (is_all_in_list(decryptedTemp, message_len))
         {
+            for (int i = 0; i < MAX_WORDS; i++)
+            {
+                decrypted[i] = decryptedTemp[i];
+            }
             return true;
             break;
         }
