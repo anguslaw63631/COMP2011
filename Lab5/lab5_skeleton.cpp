@@ -80,7 +80,7 @@ bool is_all_in_list(string word[], int length)
             count++;
         }
     }
-    if (count >= 2)
+    if (count == length)
     {
         return true;
     }
@@ -115,9 +115,11 @@ bool read_encrypted_messages(string encrypted[], int &message_len)
         return false;
     }
 
-    std::string line;
-    for (message_len = 0; std::getline(fin, line); ++message_len)
-        ;
+    string word;
+    while (fin >> word)
+    {
+        message_len++;
+    }
 
     fin.clear();
     fin.seekg(0);
