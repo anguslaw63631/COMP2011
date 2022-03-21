@@ -39,29 +39,39 @@ bool solve(int input[], int size, int target, int result[], int &resultSize)
 
 void printString(const char str[])
 {
+    if (*str == '\0')
+    {
+        cout << '\n';
+        return;
+    }
+    else
+    {
+        cout << *str;
+        printString(str + 1);
+    }
 }
 float power(float x, int y)
 {
     float temp;
-    if( y == 0)
-       return 1;
-    temp = power(x, y/2);       
-    if (y%2 == 0)
-        return temp*temp;
+    if (y == 0)
+        return 1;
+    temp = power(x, y / 2);
+    if (y % 2 == 0)
+        return temp * temp;
     else
     {
-        if(y > 0)
-            return x*temp*temp;
+        if (y > 0)
+            return x * temp * temp;
         else
-            return (temp*temp)/x;
+            return (temp * temp) / x;
     }
 }
 
 int getIntValue(const char str[], int start, int end)
 {
-    if ((end-start) <= 0)
-        return str[start] -48;
-    return (getIntValue(str,start+1,end)+(str[start] -48 )* (power(10,end-start)));
+    if ((end - start) <= 0)
+        return str[start] - 48;
+    return (getIntValue(str, start + 1, end) + (str[start] - 48) * (power(10, end - start)));
 }
 
 int evaluate(const char str[])
