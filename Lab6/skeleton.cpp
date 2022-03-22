@@ -14,7 +14,7 @@ bool findUncoveredGrid(int board[][MAX_WIDTH], int height, int width, int &r_id,
 
 int inputX, inputY, resultCal = 0;
 bool boardCal[MAX_WIDTH + 1][MAX_HEIGHT + 1];
-bool debugSwitch = true;
+bool debugSwitch = false;
 
 void calResult(int calX, int calY)
 {

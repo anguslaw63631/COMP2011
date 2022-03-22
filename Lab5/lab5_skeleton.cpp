@@ -151,22 +151,20 @@ bool find_valid_shift(string encrypted[], int message_len, string decrypted[])
 {
     // TODO: implement this function according to comments above.
     // CODE STARTS HERE
-    string encryptedTemp[MAX_WORDS];
     string decryptedTemp[MAX_WORDS];
     for (int j = 0; j <= 25; j++)
     {
         for (int i = 0; i < MAX_WORDS; i++)
         {
-            encryptedTemp[i] = encrypted[i];
             decryptedTemp[i] = decrypted[i];
         }
 
         for (int i = 0; i < message_len; i++)
         {
-            for (int k = 0; k < encryptedTemp[i].length(); k++)
+            for (int k = 0; k < encrypted[i].length(); k++)
             {
-                decryptedTemp[i] += encryptedTemp[i][k] + j;
-                if (encryptedTemp[i][k] + j > 122)
+                decryptedTemp[i] += encrypted[i][k] + j;
+                if (encrypted[i][k] + j > 122)
                 {
                     decryptedTemp[i][k] -= 26;
                 }
@@ -179,7 +177,6 @@ bool find_valid_shift(string encrypted[], int message_len, string decrypted[])
                 decrypted[i] = decryptedTemp[i];
             }
             return true;
-            break;
         }
     }
 
