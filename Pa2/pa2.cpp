@@ -32,9 +32,52 @@ int arraySum(int array[], int arraySize)
     // change this line if you want
 }
 
+bool solve(int input[], int size, int target, int result[], int &resultSize, int count, int sum,int offset)
+{
+
+    if (sum == target)
+    {
+        return true;
+    }
+
+    if (count >= size)
+    {
+        return false;
+    }
+    resultSize++;
+    if (solve(input, size, target, result, resultSize, count + 1, sum + input[count],offset) == false)
+    {
+        
+        if(solve(input, size, target, result, resultSize, count + 1, sum - input[count],offset) == false){
+            resultSize--;
+            offset++;
+            if(solve(input, size, target, result, resultSize, count + 1, sum,offset)==false){
+                
+                return false;
+
+            }else{
+                
+                return true;
+            }
+        }else{
+            result[count-offset] = -input[count];
+            return true;
+        }
+    }else{
+        result[count-offset] = input[count];
+        return true;
+    }
+    
+}
+
 bool solve(int input[], int size, int target, int result[], int &resultSize)
 {
-    return false; // change this line if you want
+    int offset = 0;
+    if (solve(input, size, target, result, resultSize, 0, 0,offset))
+    {
+        return true;
+    }
+    return false;
 }
 
 void printString(const char str[])
@@ -124,10 +167,11 @@ int evaluate(const char str[], int start, int end, int lens)
     }
 
     int next = findNext(str, lens, start);
-    //cout << "Begin: " << start << " end: " << end << " next: " << next << endl;
+    // cout << "Begin: " << start << " end: " << end << " next: " << next << endl;
     if (next == -1)
     {
-        if(str[findBack(str,lens,start)]== '-'){
+        if (str[findBack(str, lens, start)] == '-')
+        {
             return -getIntValue(str, start, end);
         }
         return getIntValue(str, start, end);
@@ -135,12 +179,13 @@ int evaluate(const char str[], int start, int end, int lens)
     else if (next != start)
     {
 
-        //cout << "IF | start: " << start << " end: " << end << " next: " << next << endl;
-        //cout << "get Value: " << getIntValue(str, start, next - 1)<<endl;
-        if(str[findBack(str,lens,start)]== '-'){
-            return evaluate(str, start + (next-start+1) , end, lens) - getIntValue(str, start, next - 1);
+        // cout << "IF | start: " << start << " end: " << end << " next: " << next << endl;
+        // cout << "get Value: " << getIntValue(str, start, next - 1)<<endl;
+        if (str[findBack(str, lens, start)] == '-')
+        {
+            return evaluate(str, start + (next - start + 1), end, lens) - getIntValue(str, start, next - 1);
         }
-        return evaluate(str, start + (next-start+1) , end, lens) + getIntValue(str, start, next - 1);
+        return evaluate(str, start + (next - start + 1), end, lens) + getIntValue(str, start, next - 1);
     }
     else if (next == 0)
     {
@@ -150,7 +195,7 @@ int evaluate(const char str[], int start, int end, int lens)
         if (next2 != -1)
         {
             temp2 = next2;
-            //cout << "temp2:" << temp2 << endl;
+            // cout << "temp2:" << temp2 << endl;
         }
         else
         {
@@ -159,13 +204,13 @@ int evaluate(const char str[], int start, int end, int lens)
 
         if (str[next] == '+')
         {
-            //cout << "IF Add 2| start: " << start << " temp2: " << temp2 << " next: " << next << endl;
+            // cout << "IF Add 2| start: " << start << " temp2: " << temp2 << " next: " << next << endl;
             return evaluate(str, temp2 + 1, end, lens);
         }
         else if (str[next] == '-')
         {
-            //cout << "IF Sub 2| start: " << start << " temp2: " << temp2 << " next: " << next << endl;
-            
+            // cout << "IF Sub 2| start: " << start << " temp2: " << temp2 << " next: " << next << endl;
+
             return evaluate(str, temp2 + 1, end, lens) - getIntValue(str, next + 1, temp2);
         }
     }
@@ -361,8 +406,108 @@ int main()
     }
     else if (testCase == 21)
     {
-        cout << "Find Next :"<<findNext("-21-2", 5, 1) << endl;
-        cout << "Find Back :"<<findBack("-2-12", 5, 4) << endl;
+        int input[] = {45, 42, 43};
+        int size = 3;
+        int target = 44;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 22)
+    {
+        int input[] = {45, 42, 43};
+        int size = 3;
+        int target = 43;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 23)
+    {
+        int input[] = {45, 42, 43};
+        int size = 3;
+        int target = -43;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 24)
+    {
+        int input[] = {1, 2, 3, 4};
+        int size = 4;
+        int target = 3;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 25)
+    {
+        int input[] = {1, 2, 3, 4};
+        int size = 4;
+        int target = 7;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 26)
+    {
+        int input[] = {1, 2, 3, 4};
+        int size = 4;
+        int target = 4;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
+    }
+    else if (testCase == 27)
+    {
+        int input[] = {6, 4, 3, 2, 1};
+        int size = 5;
+        int target = 4;
+        int result[ARRAY_MAX_SIZE] = {}; // filled with '\0'
+        int resultSize = 0;
+        if (solve(input, size, target, result, resultSize))
+        {
+            cout << "solved: ";
+            printArray(result, resultSize);
+        }
+        else
+            cout << "no solution!" << endl;
     }
 
     cout << "===================================" << endl;
