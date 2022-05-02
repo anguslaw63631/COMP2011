@@ -1,0 +1,18 @@
+******************************************
+All tweets in current myTwitter: 
+******************************************
+Tweet of user 0 is empty. 
+Tweets of user 1: 1006 1005 
+Tweets of user 2: 2018 2015 2014 2013 2012 2008 2002 2001 
+Tweets of user 3: 3016 3011 3009 3004 
+Tweets of user 4: 4020 4019 4017 4010 4007 4003 
+******************************************
+Recent news feed of user 1: 
+******************************************
+Current time is: 21
+You should display recent 5 tweets
+2018
+3016
+2015
+2014
+2013
