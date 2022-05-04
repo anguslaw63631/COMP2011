@@ -1,0 +1,27 @@
+Hi, which test case do you want to run?
+
+Test case 5 output:
+===================================
+
+List of all books:
+Book4 : 100 Pages, By Author1.
+Book3 : 100 Pages, By Author2.
+Book2 : 100 Pages, By Author2, Author3, Author4.
+Book1 : 100 Pages, By Author1, Author2.
+Delete the book titled "Book2"
+
+List of all books:
+Book4 : 100 Pages, By Author1.
+Book3 : 100 Pages, By Author2.
+Book1 : 100 Pages, By Author1, Author2.
+Delete the book titled "Book1"
+
+List of all books:
+Book4 : 100 Pages, By Author1.
+Book3 : 100 Pages, By Author2.
+Delete the book titled "Book4"
+
+List of all books:
+Book3 : 100 Pages, By Author2.
+Delete the book titled "Book3"
+No book in the library!

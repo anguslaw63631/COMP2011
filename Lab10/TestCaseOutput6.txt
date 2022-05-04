@@ -1,0 +1,145 @@
+Hi, which test case do you want to run?
+
+Test case 6 output:
+===================================
+
+List of all books:
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Book3 : 100 Pages, By Author2.
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author1 :
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author2 :
+Book3 : 100 Pages, By Author2.
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author3 :
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+
+Searching for books by Author4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+
+Searching for books by Author5 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author6 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author7 :
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+
+Searching for book Book1 :
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for book Book2 :
+Book2 : 100 Pages, By Author2, Author3, Author4, Author7.
+
+Searching for book Book3 :
+Book3 : 100 Pages, By Author2.
+
+Searching for book Book4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Delete the book titled "Book2"
+
+List of all books:
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Book3 : 100 Pages, By Author2.
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author1 :
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author2 :
+Book3 : 100 Pages, By Author2.
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for books by Author3 :
+
+Searching for books by Author4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author5 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author6 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author7 :
+
+Searching for book Book1 :
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for book Book2 :
+
+Searching for book Book3 :
+Book3 : 100 Pages, By Author2.
+
+Searching for book Book4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Delete the book titled "Book1"
+
+List of all books:
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Book3 : 100 Pages, By Author2.
+
+Searching for books by Author1 :
+
+Searching for books by Author2 :
+Book3 : 100 Pages, By Author2.
+
+Searching for books by Author3 :
+
+Searching for books by Author4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author5 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author6 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+
+Searching for books by Author7 :
+
+Searching for book Book1 :
+
+Searching for book Book2 :
+
+Searching for book Book3 :
+Book3 : 100 Pages, By Author2.
+
+Searching for book Book4 :
+Book4 : 100 Pages, By Author4, Author5, Author6.
+Delete the book titled "Book4"
+
+List of all books:
+Book3 : 100 Pages, By Author2.
+
+Searching for books by Author1 :
+
+Searching for books by Author2 :
+Book3 : 100 Pages, By Author2.
+
+Searching for books by Author3 :
+
+Searching for books by Author4 :
+
+Searching for books by Author5 :
+
+Searching for books by Author6 :
+
+Searching for books by Author7 :
+
+Searching for book Book1 :
+
+Searching for book Book2 :
+
+Searching for book Book3 :
+Book3 : 100 Pages, By Author2.
+
+Searching for book Book4 :
+Delete the book titled "Book3"

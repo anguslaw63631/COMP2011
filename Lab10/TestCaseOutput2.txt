@@ -1,0 +1,21 @@
+Hi, which test case do you want to run?
+
+Test case 2 output:
+===================================
+
+List of all books:
+Book3 : 100 Pages, By Author2.
+Book2 : 100 Pages, By Author2, Author3, Author4.
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for book Book1 :
+Book1 : 100 Pages, By Author1, Author2.
+
+Searching for book Book2 :
+Book2 : 100 Pages, By Author2, Author3, Author4.
+
+Searching for book Book3 :
+Book3 : 100 Pages, By Author2.
+Delete the book titled "Book3"
+Delete the book titled "Book2"
+Delete the book titled "Book1"
