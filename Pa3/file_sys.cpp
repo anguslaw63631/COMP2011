@@ -303,41 +303,48 @@ unsigned int getSize(const Dir *dir)
     }
     return totalSize;
 }
-
-const File **filesOfTag(const Dir *dir, Tag tag, unsigned int &length)
+const File **filesOfTag(const Dir *dir, Tag tag, unsigned int &length, const File **tempArray)
 {
-    const File **tagFileList = new const File *[length];
     Dir *tagDir = dir->subdir;
     File *tagFile = dir->subfile;
-    length =0;
-    while (tagFile != NULL)
+    while (tagFile != nullptr)
     {
         if (tagFile->tag == tag)
         {
-            tagFileList[length] = tagFile;
+            tempArray[length] = tagFile;
             length++;
         }
         tagFile = tagFile->next;
     }
     while (tagDir != nullptr)
     {
-        unsigned int tempLens = 0;
-        const File **tempTagFileList = filesOfTag(tagDir, tag, tempLens);
-        if (tempTagFileList != nullptr)
-        {
-            for (int i = 0; i < tempLens; i++)
-            {
-                tagFileList[length + i] = tempTagFileList[i];
-            }
-            length += tempLens;
-        }
-        delete[] tempTagFileList;
+        filesOfTag(tagDir, tag, length, tempArray);
         tagDir = tagDir->next;
     }
-    if(length<1){
+    if (length < 1)
+    {
         return nullptr;
     }
-    return tagFileList;
+    return tempArray;
+}
+
+const File **filesOfTag(const Dir *dir, Tag tag, unsigned int &length)
+{
+    length = 0;
+    const File **tagFileList = new const File *[1000];
+    const File **tagFileList2 = filesOfTag(dir, tag, length, tagFileList);
+    if (length < 1)
+    {
+       if (tagFileList != nullptr)
+            delete[] tagFileList;
+        tagFileList = nullptr;
+        if (tagFileList2 != nullptr)
+            delete[] tagFileList2;
+        tagFileList2 = nullptr;
+    }
+     
+        
+    return tagFileList2;
 }
 
 int moveFile(File *tgt, Dir *dest)
