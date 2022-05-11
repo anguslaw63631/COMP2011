@@ -1,14 +1,14 @@
-/** 
- * This file contains the command line functions. Search TODO to find the part you need to implement. 
- * Don't modify the other codes (you only need to work with three "else-if" blocks in the function "execute"). 
- * 
+/**
+ * This file contains the command line functions. Search TODO to find the part you need to implement.
+ * Don't modify the other codes (you only need to work with three "else-if" blocks in the function "execute").
+ *
  * While debugging, you could add some cout statements to show different messages according to status code
  * returned by your file system functions, check how the skeleton codes do it.
- * 
- * But do remember to REMOVE the cout statements you write. You don't need to remove the existing cout 
- * statements in the skeleton codes, just remove the cout statements in the three "else-if" blocks implemented 
+ *
+ * But do remember to REMOVE the cout statements you write. You don't need to remove the existing cout
+ * statements in the skeleton codes, just remove the cout statements in the three "else-if" blocks implemented
  * by yourself.
-*/
+ */
 
 #include <iostream>
 #include "cli.h"
@@ -137,22 +137,40 @@ Dir *execute(Dir *wd, char *rest, bool &exit)
 
     /**
      * The three commands you need to implement start here.
-    */
+     */
 
     // MKDIR
     else if (strcmp(cmd, "mkdir") == 0)
     {
         /**
          * TODO: Write your code here for the "mkdir" command
-         * 
+         *
          * Remember to remove the cout statements here before submission.
          * This block should not print anything to the standard output.
-        */
+         */
+        char filename[MAX_CMD_LEN] = "";
+        fetch(rest, filename);
 
+        int code = createDir(wd, filename);
+        // switch (code)
+        // {
+        // case -1:
+        //     cout << NOT_IMPL << endl;
+        //     break;
+        // case 1:
+        //     cout << PARAM_NULL << endl;
+        //     break;
+        // case 2:
+        //     cout << "Error: Dir name \"" << filename << "\" is illegal!" << endl;
+        //     break;
+        // case 3:
+        //     cout << "Error: Dir \"" << filename << "\" already exists!" << endl;
+        //     break;
+        // }
 
         /**
          * End of your code
-        */
+         */
     }
 
     // RM
@@ -160,15 +178,68 @@ Dir *execute(Dir *wd, char *rest, bool &exit)
     {
         /**
          * TODO: Write your code here for the "rm" command
-         * 
+         *
          * Remember to remove the cout statements here before submission.
          * This block should not print anything to the standard output.
-        */
+         */
+        char rmFlag[MAX_CMD_LEN] = "";
+        fetch(rest, rmFlag);
+        char filename[MAX_CMD_LEN] = "";
+        fetch(rest, filename);
 
+        bool recursive = false;
+        if (!strcmp(rmFlag, "-r"))
+        {
+            recursive = true;
+        }
+        else if (getSubfile(wd, rmFlag) != nullptr || getSubdir(wd, rmFlag) != nullptr)
+        {
+            strcpy(filename, rmFlag);
+        }
+        else
+        {
+            cout << "error" << endl;
+        }
+
+        if (getSubdir(wd, filename) != nullptr)
+        {
+            int code = deleteDir(wd, filename, recursive);
+            // switch (code)
+            // {
+            // case -1:
+            //     cout << NOT_IMPL << endl;
+            //     break;
+            // case 1:
+            //     cout << PARAM_NULL << endl;
+            //     break;
+            // case 2:
+            //     cout << "cannot find a sub-directory under \"" << wd->name << "\" with this" << filename << endl;
+            //     break;
+            // case 3:
+            //     cout << "directory is not empty and recursive is false. \"" << endl;
+            //     break;
+            // }
+        }
+        else
+        {
+            int code = deleteFile(wd, filename);
+            // switch (code)
+            // {
+            // case -1:
+            //     cout << NOT_IMPL << endl;
+            //     break;
+            // case 1:
+            //     cout << PARAM_NULL << endl;
+            //     break;
+            // case 2:
+            //     cout << "cannot find a sub-file under \"" << wd->name << "\" with this" << filename << endl;
+            //     break;
+            // }
+        }
 
         /**
          * End of your code
-        */
+         */
     }
 
     // MV
@@ -176,20 +247,30 @@ Dir *execute(Dir *wd, char *rest, bool &exit)
     {
         /**
          * TODO: Write your code here for the "mv" command
-         * 
+         *
          * Remember to remove the cout statements here before submission.
          * This block should not print anything to the standard output.
-        */
+         */
+        char tgt[MAX_CMD_LEN] = "";
+        fetch(rest, tgt);
+        char dest[MAX_CMD_LEN] = "";
+        fetch(rest, dest);
 
-        
+        if (getSubdir(wd, tgt) != nullptr)
+        {
+            moveDir(getSubdir(wd, tgt),getSubdir(wd, dest));
+        }else{
+            moveFile(getSubfile(wd, tgt),getSubdir(wd, dest));
+        }
+
         /**
          * End of your code
-        */
+         */
     }
 
     /**
      * All three commands finish here.
-    */
+     */
 
     // TAG
     else if (strcmp(cmd, "tag") == 0) // TODO: Error msg

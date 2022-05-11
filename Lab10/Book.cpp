@@ -14,7 +14,15 @@ using namespace std;
  * numAuthor.
  */
 Book::Book(const char * name, char * const * authorList, int numPages, int numAuthor) {
-
+     this->name = const_cast<char*>(name);
+    //strcpy(this->name,name);
+    this->authorList = (char **)authorList;
+    this->numPages = numPages;
+    this->numAuthor = numAuthor;
+    next = nullptr;
+//     char* pc = new char[100];//足够长
+//    strcpy(pc,(char *)this->authorList);
+    cout << "Book inf: "<<this->name <<" AuthorList: "<<""<<" numPages: "<<numPages<<" numAuther: "<<numAuthor<< endl;
 }
 
 /*
@@ -24,7 +32,9 @@ Book::Book(const char * name, char * const * authorList, int numPages, int numAu
  * array should be deallocated respectively.
  */
 Book::~Book() {
-
+    delete authorList;
+    delete name;
+    delete next;
 }
 
 /*
@@ -50,6 +60,15 @@ void Book::printSingleBookInfo() const {
  * the last book, next should be nullptr.
  */
 void Book::printBookInfoByName(const char *name) const {
+    if(strcmp(name,this->name)){
+        printSingleBookInfo();
+    }else{
+        cout << "1";
+        if(next != nullptr){
+
+        }
+    }
+    
 
 }
 

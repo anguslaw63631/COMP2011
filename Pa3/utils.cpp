@@ -323,6 +323,7 @@ string listDetails(const Dir *dir, Tag tag)
 {
     unsigned int length = 0;
     const File **files = filesOfTag(dir, tag, length);
+    cout << "length from utils.cpp: "<<length<<endl;
     if (length == 0)
         return "";
     if (files == NULL)
