@@ -13,16 +13,20 @@ using namespace std;
  * Remember to allocate memory for variable name, numAuthor, and each element in the array
  * numAuthor.
  */
-Book::Book(const char * name, char * const * authorList, int numPages, int numAuthor) {
-     this->name = const_cast<char*>(name);
-    //strcpy(this->name,name);
-    this->authorList = (char **)authorList;
+Book::Book(const char * name, char * const * authorList, int numPages, int numAuthor) 
+    //: numPages(numPages), numAuthor(numAuthor), next(nullptr)  //this is called a member initialization which will be covered in COMP2012, don't worry about it now. you don't need to use this line
+{
     this->numPages = numPages;
     this->numAuthor = numAuthor;
-    next = nullptr;
-//     char* pc = new char[100];//足够长
-//    strcpy(pc,(char *)this->authorList);
-    cout << "Book inf: "<<this->name <<" AuthorList: "<<""<<" numPages: "<<numPages<<" numAuther: "<<numAuthor<< endl;
+    this->next = next;
+    
+    this->name = new char [strlen(name) + 1];
+    strcpy(this->name, name);
+    this->authorList = new char* [numAuthor + 1];
+    for (int index = 0; index < numAuthor; ++index) {
+        this->authorList[index] = new char[strlen(authorList[index]) + 1];
+        strcpy(this->authorList[index], authorList[index]);
+    }
 }
 
 /*
@@ -32,9 +36,12 @@ Book::Book(const char * name, char * const * authorList, int numPages, int numAu
  * array should be deallocated respectively.
  */
 Book::~Book() {
-    delete authorList;
-    delete name;
-    delete next;
+    cout << "Delete the book titled \"" << name << "\"" << endl;
+    delete [] name;
+    for (int index = 0; index < numAuthor; ++index) {
+        delete [] authorList[index];
+    }
+    delete [] authorList;
 }
 
 /*
@@ -59,17 +66,13 @@ void Book::printSingleBookInfo() const {
  * Since the books are stored in a linked list, next is a pointer to the next book. And for 
  * the last book, next should be nullptr.
  */
-void Book::printBookInfoByName(const char *name) const {
-    if(strcmp(name,this->name)){
+void Book::printBookInfoByName(const char * name) const {
+    if (strcmp(this -> name, name) == 0) {
         printSingleBookInfo();
-    }else{
-        cout << "1";
-        if(next != nullptr){
-
-        }
     }
-    
-
+    if (next != nullptr) {
+        next -> printBookInfoByName(name);
+    }
 }
 
 /*
@@ -79,8 +82,16 @@ void Book::printBookInfoByName(const char *name) const {
  * Since the books are stored in a linked list, next is a pointer to the next book. And for 
  * the last book, next should be nullptr.
  */
-void Book::printBooksInfoByAuthor(const char *authorName) const {
-
+ void Book::printBooksInfoByAuthor(const char * authorName) const {
+    for (int index = 0; index < numAuthor; ++index) {
+        if (strcmp(authorList[index], authorName) == 0) {
+            printSingleBookInfo();
+            break;
+        }
+    }
+    if (next != nullptr) {
+        next -> printBooksInfoByAuthor(authorName);
+    }
 }
 
 /*
@@ -104,13 +115,20 @@ void Book::setNext(Book* book) {
  * the last book, next should be nullptr.
  */
 void Book::deleteBookByName(const char * name) {
-
+    while (next != nullptr && strcmp(next -> name, name) == 0) {
+        Book* toDelete = next;
+        next = next -> next;
+        delete toDelete;
+    }
+    if (next != nullptr) {
+        next -> deleteBookByName(name);
+    }
 }
 
 const char* Book::getName() const {
     return name;
 }
 
-Book* Book::getNext() { 
+Book* Book::getNext() {
     return next;
 }
